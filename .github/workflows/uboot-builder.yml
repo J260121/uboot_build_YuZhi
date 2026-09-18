@@ -69,7 +69,7 @@ jobs:
             else
               lines_map["$rest"]="SOC=$soc BOARD=$rest MULTI_LAYOUT=0 VERSION=2025 ./build.sh"
             fi
-          done < <(find ./wrt/uboot-mtk-*/configs -type f -name 'mt798*defconfig' | grep -iE 'mt798[1]_' | grep -ivE 'rfb|fpga')
+          done < <(find ./wrt/uboot-mtk-*/configs -type f -name 'mt798*defconfig' | grep -iE 'mt798[1]_QLB' | grep -ivE 'rfb|fpga')
 
           printf "%s\n" "${lines_map[@]}" | sort > ./Uboots.txt
           sed -i 's/_multi_layout//' ./Uboots.txt
