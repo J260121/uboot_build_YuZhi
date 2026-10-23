@@ -37,21 +37,17 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           set -Eeuo pipefail
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
+          sudo timedatectl set-timezone Asia/Shanghai
+    
+          sudo apt-get update -qq
+    
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
+            --no-install-recommends \
             build-essential \
-            gcc-aarch64-linux-gnu \
-            gcc-arm-linux-gnueabi \
             flex \
             bison \
             libssl-dev \
             device-tree-compiler \
-            qemu-user-static \
-            nodejs \
-            npm \
-            python3 \
-            python3-pip \
-            python3-setuptools \
             bc \
             git \
             curl \
@@ -63,10 +59,9 @@ jobs:
             file \
             xz-utils \
             zstd \
-            dos2unix \
+            python3 \
+            python3-pip \
             ca-certificates
-
-          sudo timedatectl set-timezone Asia/Shanghai
 
           sudo mkdir -p /mnt/build_wrt
           sudo chown $USER:$USER /mnt/build_wrt
