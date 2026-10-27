@@ -61,7 +61,7 @@ jobs:
 
           declare -A lines_map
           while IFS= read -r f; do
-            [[ $(basename "$f") =~ ^(mt798[6])_(.*)_defconfig$ ]] || continue
+            [[ $(basename "$f") =~ ^(mt798[16])_(.*)_defconfig$ ]] || continue
             soc="${BASH_REMATCH[1]}"
             rest="${BASH_REMATCH[2]}"
             if [[ $rest == *_multi_layout ]]; then
@@ -69,7 +69,7 @@ jobs:
             else
               lines_map["$rest"]="SOC=$soc BOARD=$rest MULTI_LAYOUT=0 VERSION=2025 ./build.sh"
             fi
-          done < <(find ./wrt/uboot-mtk-*/configs -type f -name 'mt798*defconfig' | grep -iE 'mt798[6]_ikuai-q6000' | grep -ivE 'rfb|fpga')
+          done < <(find ./wrt/uboot-mtk-*/configs -type f -name 'mt798*defconfig' | grep -iE 'mt798[16]_ikq6000' | grep -ivE 'rfb|fpga')
 
           printf "%s\n" "${lines_map[@]}" | sort > ./Uboots.txt
           sed -i 's/_multi_layout//' ./Uboots.txt
